@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  output: "standalone",
   // Limita o uso de recursos e evita subprocessos de build em ambientes Windows restritos.
   experimental: { workerThreads: true, cpus: 2, useTypeScriptCli: false },
   async headers() {

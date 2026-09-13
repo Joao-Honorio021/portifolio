@@ -317,9 +317,9 @@ No painel do Cloudflare, use:
 | Campo | Valor |
 | --- | --- |
 | Build command | `npm run build` |
-| Deploy command | `npm run deploy` |
+| Deploy command | `npx wrangler deploy` |
 
-O comando de deploy executa o build OpenNext e publica o Worker. Não use `npx wrangler deploy` diretamente como comando automático do painel, pois ele pressupõe que `.open-next/worker.js` já tenha sido gerado.
+O script `postbuild` é executado automaticamente depois do build do Next.js e gera `.open-next/worker.js`. O comando de deploy encontra o bundle pronto e publica o Worker. Para publicar diretamente pelo terminal, `npm run deploy` executa o processo completo.
 
 Para gerar e testar o bundle local sem publicar:
 

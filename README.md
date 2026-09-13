@@ -303,6 +303,31 @@ npm run build
 
 `check:publish` verifica a configuração de domínio e contatos; não publica o site nem comprova os dados editoriais. Ele pode falhar por configuração incompleta mesmo quando o build funciona. Use uma hospedagem compatível com Next.js e configure nela as variáveis públicas.
 
+### Deploy no Cloudflare Workers
+
+O projeto inclui a configuração do OpenNext para Cloudflare:
+
+- `wrangler.jsonc`: define o Worker `portifolio`, os assets e a otimização de imagens;
+- `open-next.config.ts`: configura o adaptador OpenNext;
+- `public/_headers`: aplica cache longo aos arquivos estáticos versionados;
+- `.open-next/`: bundle gerado localmente e ignorado pelo Git.
+
+No painel do Cloudflare, use:
+
+| Campo | Valor |
+| --- | --- |
+| Build command | `npm run build` |
+| Deploy command | `npm run deploy` |
+
+O comando de deploy executa o build OpenNext e publica o Worker. Não use `npx wrangler deploy` diretamente como comando automático do painel, pois ele pressupõe que `.open-next/worker.js` já tenha sido gerado.
+
+Para gerar e testar o bundle local sem publicar:
+
+```bash
+npx opennextjs-cloudflare build
+npx wrangler deploy --dry-run
+```
+
 ## Acessibilidade e desempenho
 
 - Server Components por padrão; navegação interativa e tratamento de erros usam Client Components.
